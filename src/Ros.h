@@ -22,7 +22,6 @@ public:
     Ros(int argc, char *argv[], const std::string &node_name);
     ~Ros();
     static Ros *instance(void) { return s_self; }
-    void pass_command(const std::string& msg);
     static void quit(void) { s_self->shutdown(); }
     void spin(void);
     void spinOnBackground(void);
@@ -42,12 +41,7 @@ private:
     rclcpp::Node::SharedPtr m_node;
 private:
     void wait_servers();
-    void call_crawler(signed short single);
-    void call_crawler(std::vector<signed short> pattern); 
-    void call_crawler(std::vector<signed short> pattern, std::vector<float> timing); 
-    void call_reel(int vel, float interval, bool continous);
     void goal_response_callback(std::shared_future<CrawlGoalHandle::SharedPtr> future);
-    //  void feedback_callback(CrawlGoalHandle::SharedPtr,const std::shared_ptr<CrawlerAction::Feedback> feedback);
 };
 
 #endif // NODE_H

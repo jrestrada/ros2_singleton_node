@@ -10,11 +10,11 @@ void sigint_handler(int sig){
 
 int main(int argc, char ** argv)
 {
-  Ros ros(argc, argv, "synchro_node");
+  Ros ros(argc, argv, "my_node");
   auto bind = [&] (std::string msg){
-    ros.pass_command(msg);
+
   };
-  auto sub = ros.node()->create_subscription<std_msgs::msg::String>("lgs_actuation_requests", 10, bind);
+  auto sub = ros.node()->create_subscription<std_msgs::msg::String>("mysubscription", 10, bind);
   ros.spinOnBackground();
   signal(SIGINT, sigint_handler);
   while (!g_sigint_flag){
